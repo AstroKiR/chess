@@ -1,23 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import { useCallback, useEffect, useRef, useState } from "react";
+import "./App.css";
 
 function App() {
+  const [items, setItems] = useState([1, 2, 3, 4, 5]);
+
+  const ulRef = useRef();
+
+  const scrollHandler = useCallback(() => {
+    console.log("scrolling");
+  }, []);
+
+  useEffect(() => {
+    ulRef.current.addEventListener("scroll", scrollHandler);
+  }, []);
+
+  const addItem = () => {
+    const lastNumbers = items[items.length - 1];
+    setItems([...items, lastNumbers + 1]);
+  };
+
+  const removeScrollListener = () => {
+    ulRef.current.removeEventListener("scroll", scrollHandler);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ul ref={ulRef}>
+        {items.map((item) => {
+          return <li key={item}>{item}</li>;
+        })}
+      </ul>
+      <button onClick={addItem}>ADD ITEM</button>
+      <button onClick={removeScrollListener}>REMOVE SCROLL LISTENER</button>
     </div>
   );
 }
