@@ -1,0 +1,17 @@
+.white {
+  height: 30px;
+  width: 30px;
+  background: #eee;
+  cursor: pointer;
+}
+
+.black {
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+  background-color: #999;
+}
+
+.selected {
+  background-color: rgb(102, 182, 132);
+}
