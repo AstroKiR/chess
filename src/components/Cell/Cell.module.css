@@ -1,13 +1,13 @@
 .white {
-  height: 30px;
-  width: 30px;
+  height: 90px;
+  width: 90px;
   background: #eee;
   cursor: pointer;
 }
 
 .black {
-  height: 30px;
-  width: 30px;
+  height: 90px;
+  width: 90px;
   cursor: pointer;
   background-color: #999;
 }

@@ -1,6 +1,7 @@
 import styles from "./Cell.module.css";
+import Piece from "../Piece";
 
-const Cell = ({ selected, type, piece, color, x, y, onClick }) => {
+const Cell = ({ selected, piece, color, x, y, onClick }) => {
   const selected_cell = selected ? styles.selected : null;
   return (
     <div
@@ -8,7 +9,7 @@ const Cell = ({ selected, type, piece, color, x, y, onClick }) => {
       onClick={() => onClick(x, y)}
       key={`${x}${y}`}
     >
-      {piece ? piece.type : ""}
+      {piece ? <Piece piece={piece} /> : ""}
     </div>
   );
 };
