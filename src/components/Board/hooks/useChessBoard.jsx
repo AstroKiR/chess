@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from "react";
+import setKnightWays from "../services/setKnightWays";
+import clearBoard from "../services/clearBoard";
 
 const convertPresetToBoard = (preset) => {
   const board = [
@@ -278,6 +280,14 @@ const convertPresetToBoard = (preset) => {
   return board;
 };
 
+const calculateWays = (x, y, board) => {
+  switch (board[x][y].piece.type) {
+    case "n":
+      setKnightWays(x, y, board);
+      break;
+  }
+};
+
 const createBoard = (preset) => {
   const board = convertPresetToBoard(preset);
   let setView = null;
@@ -290,18 +300,19 @@ const createBoard = (preset) => {
       if (!currentPiece) {
         if (board[x][y].piece && board[x][y].piece.color === turn) {
           board[x][y].selected = true;
-          setCurrentPiece({ x: x, y: y, piece: board[x][y].piece });
+          calculateWays(x, y, board);
+          setCurrentPiece({ x: x, y: y });
           setView(JSON.parse(JSON.stringify(board)));
         }
       }
       // second step
       else {
-        if (!board[x][y].piece || board[x][y].piece.color !== turn) {
+        if (board[x][y].traced) {
+          board[x][y].piece = board[currentPiece.x][currentPiece.y].piece;
           board[currentPiece.x][currentPiece.y].piece = null;
-          board[x][y].piece = currentPiece.piece;
           setTurn((turn) => (turn === "white" ? "black" : "white"));
         }
-        board[currentPiece.x][currentPiece.y].selected = false;
+        clearBoard(board);
         setCurrentPiece(null);
         setView(JSON.parse(JSON.stringify(board)));
       }

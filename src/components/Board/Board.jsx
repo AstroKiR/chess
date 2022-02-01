@@ -10,11 +10,11 @@ const Board = () => {
       <div>{boardTurn}</div>
       <div className={styles.board}>
         {boardView?.map((h, x) => {
-          return h.map(({ type, piece, color, selected }, y) => {
+          return h.map(({ traced, piece, color, selected }, y) => {
             return (
               <Cell
-                type={type}
                 selected={selected}
+                traced={traced}
                 piece={piece}
                 key={`${x}${y}`}
                 x={x}
