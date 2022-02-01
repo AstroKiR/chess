@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import setKnightWays from "../services/setKnightWays";
 import clearBoard from "../services/clearBoard";
+import setPawnWays from "../services/setPawnWays";
 
 const convertPresetToBoard = (preset) => {
   const board = [
@@ -10,56 +11,56 @@ const convertPresetToBoard = (preset) => {
         selected: false,
         color: "black",
         traced: false,
-        piece: { type: "r", color: "white" },
+        piece: { type: "r", color: "white", move: 0 },
       },
       {
         type: "piece",
         selected: false,
         color: "white",
         traced: false,
-        piece: { type: "n", color: "white" },
+        piece: { type: "n", color: "white", move: 0 },
       },
       {
         type: "piece",
         selected: false,
         color: "black",
         traced: false,
-        piece: { type: "b", color: "white" },
+        piece: { type: "b", color: "white", move: 0 },
       },
       {
         type: "piece",
         selected: false,
         color: "white",
         traced: false,
-        piece: { type: "q", color: "white" },
+        piece: { type: "q", color: "white", move: 0 },
       },
       {
         type: "piece",
         selected: false,
         color: "black",
         traced: false,
-        piece: { type: "k", color: "white" },
+        piece: { type: "k", color: "white", move: 0 },
       },
       {
         type: "piece",
         selected: false,
         color: "white",
         traced: false,
-        piece: { type: "b", color: "white" },
+        piece: { type: "b", color: "white", move: 0 },
       },
       {
         type: "piece",
         selected: false,
         color: "black",
         traced: false,
-        piece: { type: "n", color: "white" },
+        piece: { type: "n", color: "white", move: 0 },
       },
       {
         type: "piece",
         selected: false,
         color: "white",
         traced: false,
-        piece: { type: "r", color: "white" },
+        piece: { type: "r", color: "white", move: 0 },
       },
     ],
     [
@@ -68,77 +69,57 @@ const convertPresetToBoard = (preset) => {
         selected: false,
         color: "white",
         traced: false,
-        piece: { type: "p", color: "white" },
+        piece: { type: "p", color: "white", move: 0 },
       },
       {
         type: "piece",
         selected: false,
         color: "black",
         traced: false,
-        piece: { type: "p", color: "white" },
+        piece: { type: "p", color: "white", move: 0 },
       },
       {
         type: "piece",
         selected: false,
         color: "white",
         traced: false,
-        piece: { type: "p", color: "white" },
+        piece: { type: "p", color: "white", move: 0 },
       },
       {
         type: "piece",
         selected: false,
         color: "black",
         traced: false,
-        piece: { type: "p", color: "white" },
+        piece: { type: "p", color: "white", move: 0 },
       },
       {
         type: "piece",
         selected: false,
         color: "white",
         traced: false,
-        piece: { type: "p", color: "white" },
+        piece: { type: "p", color: "white", move: 0 },
       },
       {
         type: "piece",
         selected: false,
         color: "black",
         traced: false,
-        piece: { type: "p", color: "white" },
+        piece: { type: "p", color: "white", move: 0 },
       },
       {
         type: "piece",
         selected: false,
         color: "white",
         traced: false,
-        piece: { type: "p", color: "white" },
+        piece: { type: "p", color: "white", move: 0 },
       },
       {
         type: "piece",
         selected: false,
         color: "black",
         traced: false,
-        piece: { type: "p", color: "white" },
+        piece: { type: "p", color: "white", move: 0 },
       },
-    ],
-    [
-      { type: "empty", color: "black", piece: null, selected: false },
-      { type: "empty", color: "white", piece: null, selected: false },
-      { type: "empty", color: "black", piece: null, selected: false },
-      { type: "empty", color: "white", piece: null, selected: false },
-      { type: "empty", color: "black", piece: null, selected: false },
-      { type: "empty", color: "white", piece: null, selected: false },
-      { type: "empty", color: "black", piece: null, selected: false },
-      { type: "empty", color: "white", piece: null, selected: false },
-    ],
-    [
-      { type: "empty", color: "white", piece: null, selected: false },
-      { type: "empty", color: "black", piece: null, selected: false },
-      { type: "empty", color: "white", piece: null, selected: false },
-      { type: "empty", color: "black", piece: null, selected: false },
-      { type: "empty", color: "white", piece: null, selected: false },
-      { type: "empty", color: "black", piece: null, selected: false },
-      { type: "empty", color: "white", piece: null, selected: false },
-      { type: "empty", color: "black", piece: null, selected: false },
     ],
     [
       { type: "empty", color: "black", piece: null, selected: false },
@@ -161,61 +142,81 @@ const convertPresetToBoard = (preset) => {
       { type: "empty", color: "black", piece: null, selected: false },
     ],
     [
+      { type: "empty", color: "black", piece: null, selected: false },
+      { type: "empty", color: "white", piece: null, selected: false },
+      { type: "empty", color: "black", piece: null, selected: false },
+      { type: "empty", color: "white", piece: null, selected: false },
+      { type: "empty", color: "black", piece: null, selected: false },
+      { type: "empty", color: "white", piece: null, selected: false },
+      { type: "empty", color: "black", piece: null, selected: false },
+      { type: "empty", color: "white", piece: null, selected: false },
+    ],
+    [
+      { type: "empty", color: "white", piece: null, selected: false },
+      { type: "empty", color: "black", piece: null, selected: false },
+      { type: "empty", color: "white", piece: null, selected: false },
+      { type: "empty", color: "black", piece: null, selected: false },
+      { type: "empty", color: "white", piece: null, selected: false },
+      { type: "empty", color: "black", piece: null, selected: false },
+      { type: "empty", color: "white", piece: null, selected: false },
+      { type: "empty", color: "black", piece: null, selected: false },
+    ],
+    [
       {
         type: "piece",
         color: "black",
         selected: false,
         traced: false,
-        piece: { type: "p", color: "black" },
+        piece: { type: "p", color: "black", move: 0 },
       },
       {
         type: "piece",
         color: "white",
         selected: false,
         traced: false,
-        piece: { type: "p", color: "black" },
+        piece: { type: "p", color: "black", move: 0 },
       },
       {
         type: "piece",
         color: "black",
         selected: false,
         traced: false,
-        piece: { type: "p", color: "black" },
+        piece: { type: "p", color: "black", move: 0 },
       },
       {
         type: "piece",
         color: "white",
         selected: false,
         traced: false,
-        piece: { type: "p", color: "black" },
+        piece: { type: "p", color: "black", move: 0 },
       },
       {
         type: "piece",
         color: "black",
         selected: false,
         traced: false,
-        piece: { type: "p", color: "black" },
+        piece: { type: "p", color: "black", move: 0 },
       },
       {
         type: "piece",
         color: "white",
         selected: false,
         traced: false,
-        piece: { type: "p", color: "black" },
+        piece: { type: "p", color: "black", move: 0 },
       },
       {
         type: "piece",
         color: "black",
         selected: false,
         traced: false,
-        piece: { type: "p", color: "black" },
+        piece: { type: "p", color: "black", move: 0 },
       },
       {
         type: "piece",
         color: "white",
         selected: false,
         traced: false,
-        piece: { type: "p", color: "black" },
+        piece: { type: "p", color: "black", move: 0 },
       },
     ],
     [
@@ -224,56 +225,56 @@ const convertPresetToBoard = (preset) => {
         color: "white",
         selected: false,
         traced: false,
-        piece: { type: "r", color: "black" },
+        piece: { type: "r", color: "black", move: 0 },
       },
       {
         type: "piece",
         color: "black",
         selected: false,
         traced: false,
-        piece: { type: "n", color: "black" },
+        piece: { type: "n", color: "black", move: 0 },
       },
       {
         type: "piece",
         color: "white",
         selected: false,
         traced: false,
-        piece: { type: "b", color: "black" },
+        piece: { type: "b", color: "black", move: 0 },
       },
       {
         type: "piece",
         color: "black",
         selected: false,
         traced: false,
-        piece: { type: "q", color: "black" },
+        piece: { type: "q", color: "black", move: 0 },
       },
       {
         type: "piece",
         color: "white",
         selected: false,
         traced: false,
-        piece: { type: "k", color: "black" },
+        piece: { type: "k", color: "black", move: 0 },
       },
       {
         type: "piece",
         color: "black",
         selected: false,
         traced: false,
-        piece: { type: "b", color: "black" },
+        piece: { type: "b", color: "black", move: 0 },
       },
       {
         type: "piece",
         color: "white",
         selected: false,
         traced: false,
-        piece: { type: "n", color: "black" },
+        piece: { type: "n", color: "black", move: 0 },
       },
       {
         type: "piece",
         color: "black",
         selected: false,
         traced: false,
-        piece: { type: "r", color: "black" },
+        piece: { type: "r", color: "black", move: 0 },
       },
     ],
   ];
@@ -282,6 +283,9 @@ const convertPresetToBoard = (preset) => {
 
 const calculateWays = (x, y, board) => {
   switch (board[x][y].piece.type) {
+    case "p":
+      setPawnWays(x, y, board);
+      break;
     case "n":
       setKnightWays(x, y, board);
       break;
@@ -309,6 +313,7 @@ const createBoard = (preset) => {
       else {
         if (board[x][y].traced) {
           board[x][y].piece = board[currentPiece.x][currentPiece.y].piece;
+          board[x][y].piece.move += 1;
           board[currentPiece.x][currentPiece.y].piece = null;
           setTurn((turn) => (turn === "white" ? "black" : "white"));
         }
