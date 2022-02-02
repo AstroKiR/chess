@@ -4,9 +4,9 @@ const convertPresetToBoard = (preset) => {
     board[x] = new Array(8);
     for (let y = 0; y < board[x].length; y++) {
       if ((x + y) % 2) {
-        board[x][y] = { color: "b", piece: null, selected: false };
-      } else {
         board[x][y] = { color: "w", piece: null, selected: false };
+      } else {
+        board[x][y] = { color: "b", piece: null, selected: false };
       }
     }
   }

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import convertPresetToBoard from "../services/convertPrestToBoard";
+import convertPresetToBoard from "../services/convertPresetToBoard";
 import setKnightWays from "../services/setKnightWays";
 import clearBoard from "../services/clearBoard";
 import setPawnWays from "../services/setPawnWays";
