@@ -14,7 +14,6 @@ const setKnightWays = (x, y, board) => {
 
   way.forEach((cell) => {
     if (checkBoardBoundaries(cell.x, cell.y)) {
-      console.log(cell);
       if (
         !board[cell.x][cell.y].piece ||
         board[cell.x][cell.y].piece.color !== board[x][y].piece.color

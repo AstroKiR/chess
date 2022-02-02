@@ -16,18 +16,18 @@ import styles from "./Piece.module.css";
 
 const Piece = ({ piece }) => {
   let image = null;
-  if (piece.type === "k" && piece.color === "white") image = kw;
-  if (piece.type === "q" && piece.color === "white") image = qw;
-  if (piece.type === "r" && piece.color === "white") image = rw;
-  if (piece.type === "b" && piece.color === "white") image = bw;
-  if (piece.type === "n" && piece.color === "white") image = nw;
-  if (piece.type === "p" && piece.color === "white") image = pw;
-  if (piece.type === "k" && piece.color === "black") image = kb;
-  if (piece.type === "q" && piece.color === "black") image = qb;
-  if (piece.type === "r" && piece.color === "black") image = rb;
-  if (piece.type === "b" && piece.color === "black") image = bb;
-  if (piece.type === "n" && piece.color === "black") image = nb;
-  if (piece.type === "p" && piece.color === "black") image = pb;
+  if (piece.type === "k" && piece.color === "w") image = kw;
+  if (piece.type === "q" && piece.color === "w") image = qw;
+  if (piece.type === "r" && piece.color === "w") image = rw;
+  if (piece.type === "b" && piece.color === "w") image = bw;
+  if (piece.type === "n" && piece.color === "w") image = nw;
+  if (piece.type === "p" && piece.color === "w") image = pw;
+  if (piece.type === "k" && piece.color === "b") image = kb;
+  if (piece.type === "q" && piece.color === "b") image = qb;
+  if (piece.type === "r" && piece.color === "b") image = rb;
+  if (piece.type === "b" && piece.color === "b") image = bb;
+  if (piece.type === "n" && piece.color === "b") image = nb;
+  if (piece.type === "p" && piece.color === "b") image = pb;
   return <img src={image} className={styles.piece} />;
 };
 

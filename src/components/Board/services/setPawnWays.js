@@ -7,7 +7,7 @@ const setPawnWays = (x, y, board) => {
   let common_cell = null;
   let attacking_cells = null;
 
-  if (pawn.color === "white") {
+  if (pawn.color === "w") {
     additional_cell = { x: x + 2, y: y };
     common_cell = { x: x + 1, y: y };
     attacking_cells = [

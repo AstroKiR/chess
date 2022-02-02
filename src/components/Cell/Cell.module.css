@@ -1,4 +1,4 @@
-.white {
+.w {
   height: 90px;
   width: 90px;
   background: #eee;
@@ -6,7 +6,7 @@
   border: 1px solid lightgray;
 }
 
-.black {
+.b {
   height: 90px;
   width: 90px;
   cursor: pointer;
