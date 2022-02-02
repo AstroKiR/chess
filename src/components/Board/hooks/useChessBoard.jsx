@@ -3,14 +3,18 @@ import convertPresetToBoard from "../services/convertPresetToBoard";
 import setKnightWays from "../services/setKnightWays";
 import clearBoard from "../services/clearBoard";
 import setPawnWays from "../services/setPawnWays";
+import calculateKing from "../services/calculateKing";
 
-const calculateWays = (x, y, board) => {
+const calculateOpportunities = (x, y, board) => {
   switch (board[x][y].piece.type) {
     case "p":
       setPawnWays(x, y, board);
       break;
     case "n":
       setKnightWays(x, y, board);
+      break;
+    case "k":
+      calculateKing(x, y, board);
       break;
   }
 };
@@ -27,7 +31,7 @@ const createBoard = (preset) => {
       if (!currentPiece) {
         if (board[x][y].piece && board[x][y].piece.color === turn) {
           board[x][y].selected = true;
-          calculateWays(x, y, board);
+          calculateOpportunities(x, y, board);
           setCurrentPiece({ x: x, y: y });
           setView(JSON.parse(JSON.stringify(board)));
         }
