@@ -4,6 +4,7 @@ import setKnightWays from "../services/setKnightWays";
 import clearBoard from "../services/clearBoard";
 import setPawnWays from "../services/setPawnWays";
 import calculateKing from "../services/calculateKing";
+import calculateRook from "../services/calculateRook";
 
 const calculateOpportunities = (x, y, board) => {
   switch (board[x][y].piece.type) {
@@ -15,6 +16,9 @@ const calculateOpportunities = (x, y, board) => {
       break;
     case "k":
       calculateKing(x, y, board);
+      break;
+    case "r":
+      calculateRook(x, y, board);
       break;
   }
 };

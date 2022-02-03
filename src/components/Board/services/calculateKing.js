@@ -15,9 +15,9 @@ const calculateKing = (x, y, board) => {
 
   opportunities.forEach((opportunitie) => {
     if (
-      checkBoardBoundaries(opportunities.x, opportunities.y) &&
-      board[opportunitie.x][opportunitie.y].piece &&
-      board[opportunitie.x][opportunitie.y].piece.color !== king.color
+      checkBoardBoundaries(opportunitie.x, opportunitie.y) &&
+      (!board[opportunitie.x][opportunitie.y].piece ||
+        board[opportunitie.x][opportunitie.y].piece.color !== king.color)
     ) {
       board[opportunitie.x][opportunitie.y].traced = true;
     }
