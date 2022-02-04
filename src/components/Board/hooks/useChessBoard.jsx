@@ -5,7 +5,9 @@ import clearBoard from "../services/clearBoard";
 import setPawnWays from "../services/setPawnWays";
 import calculateKing from "../services/calculateKing";
 import calculateRook from "../services/calculateRook";
+import calculateBishop from "../services/calculateBishop";
 
+//ToDo object key: type value: func
 const calculateOpportunities = (x, y, board) => {
   switch (board[x][y].piece.type) {
     case "p":
@@ -19,6 +21,9 @@ const calculateOpportunities = (x, y, board) => {
       break;
     case "r":
       calculateRook(x, y, board);
+      break;
+    case "b":
+      calculateBishop(x, y, board);
       break;
   }
 };
@@ -36,7 +41,7 @@ const createBoard = (preset) => {
         if (board[x][y].piece && board[x][y].piece.color === turn) {
           board[x][y].selected = true;
           calculateOpportunities(x, y, board);
-          setCurrentPiece({ x: x, y: y });
+          setCurrentPiece({ x: x, y: y }); //ToDo x, y
           setView(JSON.parse(JSON.stringify(board)));
         }
       }

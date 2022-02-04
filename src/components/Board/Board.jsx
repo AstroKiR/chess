@@ -7,12 +7,15 @@ const preset = {
   pieces: {
     e1: { piece: "kw", move: 0 },
     e2: { piece: "rw", move: 0 },
-    d2: { piece: "bw", move: 0 },
-    e4: { piece: "nw", move: 0 },
+    d1: { piece: "qw", move: 0 },
+    c1: { piece: "bw", move: 0 },
+    f1: { piece: "bw", move: 0 },
 
     e7: { piece: "rb", move: 0 },
     e8: { piece: "kb", move: 0 },
-    g2: { piece: "nb", move: 0 },
+    d8: { piece: "qb", move: 0 },
+    c8: { piece: "bb", move: 0 },
+    f8: { piece: "bb", move: 0 },
 
     // a1: { piece: "rw", move: 0 },
     // b1: { piece: "nw", move: 0 },
