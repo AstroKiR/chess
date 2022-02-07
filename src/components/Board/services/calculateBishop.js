@@ -9,7 +9,7 @@ const calculateBishop = (h, v, board) => {
     if (board[i][j].piece) {
       if (board[i][j].piece.color !== bishop.color) {
         let check = false;
-        if (board[h][i].piece.type === "k") check = true;
+        if (board[i][j].piece.type === "k") check = true;
         opportunities.push({ h: i, v: j, check: check });
       }
       break;

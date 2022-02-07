@@ -15,16 +15,24 @@ const calculateKing = (h, v, board) => {
   ];
 
   potential_opportunities.forEach((opportunity) => {
-    if (
-      checkBoardBoundaries(opportunity.h, opportunity.v) &&
-      (!board[opportunity.h][opportunity.v].piece ||
-        board[opportunity.h][opportunity.v].piece.color !== king.color)
-    ) {
-      real_opportunities.push({
-        h: opportunity.h,
-        v: opportunity.v,
-        check: false,
-      });
+    if (checkBoardBoundaries(opportunity.h, opportunity.v)) {
+      if (!board[opportunity.h][opportunity.v].piece) {
+        real_opportunities.push({
+          h: opportunity.h,
+          v: opportunity.v,
+          check: false,
+        });
+      } else if (
+        board[opportunity.h][opportunity.v].piece.color !== king.color
+      ) {
+        const check =
+          board[opportunity.h][opportunity.v].piece.type === "k" ? true : false;
+        real_opportunities.push({
+          h: opportunity.h,
+          v: opportunity.v,
+          check: check,
+        });
+      }
     }
   });
   return real_opportunities;

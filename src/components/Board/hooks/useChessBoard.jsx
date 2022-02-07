@@ -34,6 +34,38 @@ const calculateOpportunities = (h, v, board) => {
   return opportunities;
 };
 
+const checkTheCheck = (h, v, opportunity, board) => {
+  let checkResult = true;
+  const oppositCoordinates = [];
+  const piece = board[h][v].piece;
+  board[opportunity.h][opportunity.v].piece = piece;
+  board[h][v].piece = null;
+
+  for (let i = 0; i < 8; i++) {
+    for (let j = 0; j < 8; j++) {
+      if (board[i][j].piece && board[i][j].piece.color !== piece.color) {
+        oppositCoordinates.push({ h: i, v: j });
+      }
+    }
+  }
+
+  oppositCoordinates.forEach((coordinates) => {
+    const pieceOpportunities = calculateOpportunities(
+      coordinates.h,
+      coordinates.v,
+      board
+    );
+    pieceOpportunities.forEach((pieceOpportunity) => {
+      if (pieceOpportunity.check) {
+        checkResult = false;
+        return;
+      }
+    });
+  });
+
+  return checkResult;
+};
+
 const createBoard = (preset) => {
   const board = convertPresetToBoard(preset);
   let setView = null;
@@ -54,7 +86,8 @@ const createBoard = (preset) => {
           );
 
           opportunities.forEach((opportunity) => {
-            board[opportunity.h][opportunity.v].traced = true;
+            if (checkTheCheck(h, v, opportunity, structuredClone(board)))
+              board[opportunity.h][opportunity.v].traced = true;
           });
 
           setCurrentPiece({ h, v });

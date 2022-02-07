@@ -101,7 +101,6 @@ const calculateQueen = (h, v, board) => {
     opportunities.push({ h: h, v: i, check: false });
   }
 
-  console.log(opportunities);
   return opportunities;
 };
 

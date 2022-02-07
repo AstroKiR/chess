@@ -84,7 +84,6 @@ const setPawnWays = (h, v, board) => {
     });
   }
 
-  console.log(real_opportunities);
   return real_opportunities;
 };
 
