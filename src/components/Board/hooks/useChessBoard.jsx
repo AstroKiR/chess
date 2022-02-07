@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import convertPresetToBoard from "../services/convertPresetToBoard";
-import setKnightWays from "../services/setKnightWays";
+import calculateKnight from "../services/calculateKnight";
 import clearBoard from "../services/clearBoard";
-import setPawnWays from "../services/setPawnWays";
+import calculatePawn from "../services/calculatePawn";
 import calculateKing from "../services/calculateKing";
 import calculateRook from "../services/calculateRook";
 import calculateBishop from "../services/calculateBishop";
@@ -12,10 +12,10 @@ import calculateQueen from "../services/calculateQueen";
 const calculateOpportunities = (h, v, board) => {
   switch (board[h][v].piece.type) {
     case "p":
-      setPawnWays(h, v, board);
+      calculatePawn(h, v, board);
       break;
     case "n":
-      setKnightWays(h, v, board);
+      calculateKnight(h, v, board);
       break;
     case "k":
       calculateKing(h, v, board);
