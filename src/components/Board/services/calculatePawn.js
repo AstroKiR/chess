@@ -25,46 +25,66 @@ const setPawnWays = (h, v, board) => {
     ];
   }
 
-  // пешка еще не ходила
+  // pawn did not move
   if (
     !pawn.move &&
     checkBoardBoundaries(additional_cell.h, additional_cell.v) &&
     !board[additional_cell.h][additional_cell.v].piece
   ) {
-    real_opportunities.push({ h: additional_cell.h, v: additional_cell.v });
+    real_opportunities.push({
+      h: additional_cell.h,
+      v: additional_cell.v,
+      check: false,
+    });
   }
 
-  // обычный ход
+  // pawn moved
   if (
     checkBoardBoundaries(common_cell.h, common_cell.v) &&
     !board[common_cell.h][common_cell.v].piece
   ) {
-    real_opportunities.push({ h: common_cell.h, v: common_cell.v });
+    real_opportunities.push({
+      h: common_cell.h,
+      v: common_cell.v,
+      check: false,
+    });
   }
 
-  // возможность взятия слева
+  // left hit
   if (
     checkBoardBoundaries(attacking_cells[0].h, attacking_cells[0].v) &&
     board[attacking_cells[0].h][attacking_cells[0].v].piece &&
     board[attacking_cells[0].h][attacking_cells[0].v].piece.color !== pawn.color
   ) {
+    const check =
+      board[attacking_cells[0].h][attacking_cells[0].v].piece.type === "k"
+        ? true
+        : false;
     real_opportunities.push({
       h: attacking_cells[0].h,
       v: attacking_cells[0].v,
+      check: check,
     });
   }
 
-  // возможность взятия справа
+  // right hit
   if (
     checkBoardBoundaries(attacking_cells[1].h, attacking_cells[1].v) &&
     board[attacking_cells[1].h][attacking_cells[1].v].piece &&
     board[attacking_cells[1].h][attacking_cells[1].v].piece.color !== pawn.color
   ) {
+    const check =
+      board[attacking_cells[1].h][attacking_cells[1].v].piece.type === "k"
+        ? true
+        : false;
     real_opportunities.push({
       h: attacking_cells[1].h,
       v: attacking_cells[1].v,
+      check: check,
     });
   }
+
+  console.log(real_opportunities);
   return real_opportunities;
 };
 

@@ -20,7 +20,11 @@ const calculateKing = (h, v, board) => {
       (!board[opportunity.h][opportunity.v].piece ||
         board[opportunity.h][opportunity.v].piece.color !== king.color)
     ) {
-      real_opportunities.push({ h: opportunity.h, v: opportunity.v });
+      real_opportunities.push({
+        h: opportunity.h,
+        v: opportunity.v,
+        check: false,
+      });
     }
   });
   return real_opportunities;

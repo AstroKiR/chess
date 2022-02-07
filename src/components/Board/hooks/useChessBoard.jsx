@@ -46,6 +46,7 @@ const createBoard = (preset) => {
       if (!currentPiece) {
         if (board[h][v].piece && board[h][v].piece.color === turn) {
           board[h][v].selected = true;
+
           const opportunities = calculateOpportunities(
             h,
             v,

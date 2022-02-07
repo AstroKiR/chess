@@ -15,12 +15,26 @@ const calculateKnight = (h, v, board) => {
 
   potential_opportunities.forEach((opportunity) => {
     if (checkBoardBoundaries(opportunity.h, opportunity.v)) {
-      if (
-        !board[opportunity.h][opportunity.v].piece ||
+      if (!board[opportunity.h][opportunity.v].piece) {
+        // there isn't a piece
+        real_opportunities.push({
+          h: opportunity.h,
+          v: opportunity.v,
+          check: false,
+        });
+      } else if (
+        // there is an opposite piece
         board[opportunity.h][opportunity.v].piece.color !==
-          board[h][v].piece.color
+        board[h][v].piece.color
       ) {
-        real_opportunities.push({ h: opportunity.h, v: opportunity.v });
+        // if the piece is King
+        const check =
+          board[opportunity.h][opportunity.v].piece.type === "k" ? true : false;
+        real_opportunities.push({
+          h: opportunity.h,
+          v: opportunity.v,
+          check: check,
+        });
       }
     }
   });

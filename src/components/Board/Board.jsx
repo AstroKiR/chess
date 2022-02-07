@@ -5,6 +5,16 @@ import useChessBoard from "./hooks/useChessBoard";
 const preset = {
   turn: "w",
   pieces: {
+    // d1: { piece: "kw", move: 0 },
+    // d2: { piece: "rw", move: 0 },
+    // d7: { piece: "rb", move: 0 },
+    // d8: { piece: "kb", move: 0 },
+    // e6: { piece: "pw", move: 0 },
+
+    // h4: { piece: "bw", move: 0 },
+    // g5: { piece: "bb", move: 0 },
+    // h8: { piece: "nb", move: 0 },
+    // h7: { piece: "qb", move: 0 },
     a1: { piece: "rw", move: 0 },
     b1: { piece: "nw", move: 0 },
     c1: { piece: "bw", move: 0 },

@@ -7,43 +7,50 @@ const calculateBishop = (h, v, board) => {
 
   for (let i = h + 1, j = v + 1; checkBoardBoundaries(i, j); i++, j++) {
     if (board[i][j].piece) {
-      console.log(board[i][j]);
       if (board[i][j].piece.color !== bishop.color) {
-        opportunities.push({ h: i, v: j });
+        let check = false;
+        if (board[h][i].piece.type === "k") check = true;
+        opportunities.push({ h: i, v: j, check: check });
       }
       break;
     }
-    opportunities.push({ h: i, v: j });
+    opportunities.push({ h: i, v: j, check: false });
   }
 
   for (let i = h - 1, j = v - 1; checkBoardBoundaries(i, j); i--, j--) {
     if (board[i][j].piece) {
       if (board[i][j].piece.color !== bishop.color) {
-        opportunities.push({ h: i, v: j });
+        let check = false;
+        if (board[i][j].piece.type === "k") check = true;
+        opportunities.push({ h: i, v: j, check: check });
       }
       break;
     }
-    opportunities.push({ h: i, v: j });
+    opportunities.push({ h: i, v: j, check: false });
   }
 
   for (let i = h + 1, j = v - 1; checkBoardBoundaries(i, j); i++, j--) {
     if (board[i][j].piece) {
       if (board[i][j].piece.color !== bishop.color) {
-        opportunities.push({ h: i, v: j });
+        let check = false;
+        if (board[i][j].piece.type === "k") check = true;
+        opportunities.push({ h: i, v: j, check: check });
       }
       break;
     }
-    opportunities.push({ h: i, v: j });
+    opportunities.push({ h: i, v: j, check: false });
   }
 
   for (let i = h - 1, j = v + 1; checkBoardBoundaries(i, j); i--, j++) {
     if (board[i][j].piece) {
       if (board[i][j].piece.color !== bishop.color) {
-        opportunities.push({ h: i, v: j });
+        let check = false;
+        if (board[i][j].piece.type === "k") check = true;
+        opportunities.push({ h: i, v: j, check: check });
       }
       break;
     }
-    opportunities.push({ h: i, v: j });
+    opportunities.push({ h: i, v: j, check: false });
   }
 
   return opportunities;
