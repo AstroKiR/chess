@@ -1,27 +1,30 @@
 import checkBoardBoundaries from "./checkBoardBoundaries";
 
-const setKnightWays = (x, y, board) => {
-  const way = [
-    { x: x - 1, y: y - 2 },
-    { x: x - 1, y: y + 2 },
-    { x: x + 1, y: y + 2 },
-    { x: x + 1, y: y - 2 },
-    { x: x - 2, y: y - 1 },
-    { x: x - 2, y: y + 1 },
-    { x: x + 2, y: y + 1 },
-    { x: x + 2, y: y - 1 },
+const calculateKnight = (h, v, board) => {
+  const real_opportunities = [];
+  const potential_opportunities = [
+    { h: h - 1, v: v - 2 },
+    { h: h - 1, v: v + 2 },
+    { h: h + 1, v: v + 2 },
+    { h: h + 1, v: v - 2 },
+    { h: h - 2, v: v - 1 },
+    { h: h - 2, v: v + 1 },
+    { h: h + 2, v: v + 1 },
+    { h: h + 2, v: v - 1 },
   ];
 
-  way.forEach((cell) => {
-    if (checkBoardBoundaries(cell.x, cell.y)) {
+  potential_opportunities.forEach((opportunity) => {
+    if (checkBoardBoundaries(opportunity.h, opportunity.v)) {
       if (
-        !board[cell.x][cell.y].piece ||
-        board[cell.x][cell.y].piece.color !== board[x][y].piece.color
+        !board[opportunity.h][opportunity.v].piece ||
+        board[opportunity.h][opportunity.v].piece.color !==
+          board[h][v].piece.color
       ) {
-        board[cell.x][cell.y].traced = true;
+        real_opportunities.push({ h: opportunity.h, v: opportunity.v });
       }
     }
   });
+  return real_opportunities;
 };
 
-export default setKnightWays;
+export default calculateKnight;

@@ -1,5 +1,5 @@
-const checkBoardBoundaries = (x, y) => {
-  return x >= 0 && x < 8 && y >= 0 && y < 8 ? true : false;
+const checkBoardBoundaries = (h, v) => {
+  return h >= 0 && h < 8 && v >= 0 && v < 8 ? true : false;
 };
 
 export default checkBoardBoundaries;

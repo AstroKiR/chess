@@ -2,34 +2,36 @@ import { useEffect, useRef, useState } from "react";
 import convertPresetToBoard from "../services/convertPresetToBoard";
 import calculateKnight from "../services/calculateKnight";
 import clearBoard from "../services/clearBoard";
-import calculatePawn from "../services/calculatePawn";
+import calculateBishop from "../services/calculateBishop";
 import calculateKing from "../services/calculateKing";
 import calculateRook from "../services/calculateRook";
-import calculateBishop from "../services/calculateBishop";
+import calculatePawn from "../services/calculatePawn";
 import calculateQueen from "../services/calculateQueen";
 
 //ToDo object key: type value: func
 const calculateOpportunities = (h, v, board) => {
+  let opportunities = null;
   switch (board[h][v].piece.type) {
     case "p":
-      calculatePawn(h, v, board);
+      opportunities = calculatePawn(h, v, board);
       break;
     case "n":
-      calculateKnight(h, v, board);
+      opportunities = calculateKnight(h, v, board);
       break;
     case "k":
-      calculateKing(h, v, board);
+      opportunities = calculateKing(h, v, board);
       break;
     case "r":
-      calculateRook(h, v, board);
+      opportunities = calculateRook(h, v, board);
       break;
     case "b":
-      calculateBishop(h, v, board);
+      opportunities = calculateBishop(h, v, board);
       break;
     case "q":
-      calculateQueen(h, v, board);
+      opportunities = calculateQueen(h, v, board);
       break;
   }
+  return opportunities;
 };
 
 const createBoard = (preset) => {
@@ -44,7 +46,16 @@ const createBoard = (preset) => {
       if (!currentPiece) {
         if (board[h][v].piece && board[h][v].piece.color === turn) {
           board[h][v].selected = true;
-          calculateOpportunities(h, v, board);
+          const opportunities = calculateOpportunities(
+            h,
+            v,
+            structuredClone(board)
+          );
+
+          opportunities.forEach((opportunity) => {
+            board[opportunity.h][opportunity.v].traced = true;
+          });
+
           setCurrentPiece({ h, v });
           setView(JSON.parse(JSON.stringify(board)));
         }

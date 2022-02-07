@@ -1,27 +1,29 @@
 import checkBoardBoundaries from "./checkBoardBoundaries";
 
-const calculateKing = (x, y, board) => {
-  const king = board[x][y].piece;
-  const opportunities = [
-    { x: x - 1, y: y - 1 },
-    { x: x - 1, y: y },
-    { x: x - 1, y: y + 1 },
-    { x: x, y: y + 1 },
-    { x: x, y: y - 1 },
-    { x: x + 1, y: y - 1 },
-    { x: x + 1, y: y },
-    { x: x + 1, y: y + 1 },
+const calculateKing = (h, v, board) => {
+  const king = board[h][v].piece;
+  const real_opportunities = [];
+  const potential_opportunities = [
+    { h: h - 1, v: v - 1 },
+    { h: h - 1, v: v },
+    { h: h - 1, v: v + 1 },
+    { h: h, v: v + 1 },
+    { h: h, v: v - 1 },
+    { h: h + 1, v: v - 1 },
+    { h: h + 1, v: v },
+    { h: h + 1, v: v + 1 },
   ];
 
-  opportunities.forEach((opportunitie) => {
+  potential_opportunities.forEach((opportunity) => {
     if (
-      checkBoardBoundaries(opportunitie.x, opportunitie.y) &&
-      (!board[opportunitie.x][opportunitie.y].piece ||
-        board[opportunitie.x][opportunitie.y].piece.color !== king.color)
+      checkBoardBoundaries(opportunity.h, opportunity.v) &&
+      (!board[opportunity.h][opportunity.v].piece ||
+        board[opportunity.h][opportunity.v].piece.color !== king.color)
     ) {
-      board[opportunitie.x][opportunitie.y].traced = true;
+      real_opportunities.push({ h: opportunity.h, v: opportunity.v });
     }
   });
+  return real_opportunities;
 };
 
 export default calculateKing;

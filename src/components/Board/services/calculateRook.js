@@ -1,53 +1,51 @@
 import checkBoardBoundaries from "./checkBoardBoundaries";
 
-const calculateRook = (x, y, board) => {
-  const rook = board[x][y].piece;
+const calculateRook = (h, v, board) => {
+  const rook = board[h][v].piece;
 
   const opportunities = [];
 
-  for (let i = x + 1; i < 8; i++) {
-    if (board[i][y].piece) {
-      if (board[i][y].piece.color !== rook.color) {
-        opportunities.push({ x: i, y: y });
+  for (let i = h + 1; i < 8; i++) {
+    if (board[i][v].piece) {
+      if (board[i][v].piece.color !== rook.color) {
+        opportunities.push({ h: i, v: v });
       }
       break;
     }
-    opportunities.push({ x: i, y: y });
+    opportunities.push({ h: i, v: v });
   }
 
-  for (let i = x - 1; i >= 0; i--) {
-    if (board[i][y].piece) {
-      if (board[i][y].piece.color !== rook.color) {
-        opportunities.push({ x: i, y: y });
+  for (let i = h - 1; i >= 0; i--) {
+    if (board[i][v].piece) {
+      if (board[i][v].piece.color !== rook.color) {
+        opportunities.push({ h: i, v: v });
       }
       break;
     }
-    opportunities.push({ x: i, y: y });
+    opportunities.push({ h: i, v: v });
   }
 
-  for (let i = y + 1; i < 8; i++) {
-    if (board[x][i].piece) {
-      if (board[x][i].piece.color !== rook.color) {
-        opportunities.push({ x: x, y: i });
+  for (let i = v + 1; i < 8; i++) {
+    if (board[h][i].piece) {
+      if (board[h][i].piece.color !== rook.color) {
+        opportunities.push({ h: h, v: i });
       }
       break;
     }
-    opportunities.push({ x: x, y: i });
+    opportunities.push({ h: h, v: i });
   }
 
-  for (let i = y - 1; i >= 0; i--) {
-    if (board[x][i].piece) {
-      if (board[x][i].piece.color !== rook.color) {
-        opportunities.push({ x: x, y: i });
+  for (let i = v - 1; i >= 0; i--) {
+    if (board[h][i].piece) {
+      if (board[h][i].piece.color !== rook.color) {
+        opportunities.push({ h: h, v: i });
       }
       break;
     }
-    opportunities.push({ x: x, y: i });
+    opportunities.push({ h: h, v: i });
   }
 
-  opportunities.forEach((opportunity) => {
-    board[opportunity.x][opportunity.y].traced = true;
-  });
+  return opportunities;
 };
 
 export default calculateRook;

@@ -46,8 +46,6 @@ const calculateBishop = (h, v, board) => {
     opportunities.push({ h: i, v: j });
   }
 
-  opportunities.forEach((opportunity) => {
-    board[opportunity.h][opportunity.v].traced = true;
-  });
+  return opportunities;
 };
 export default calculateBishop;

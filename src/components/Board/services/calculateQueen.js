@@ -93,9 +93,7 @@ const calculateQueen = (h, v, board) => {
     opportunities.push({ h: h, v: i });
   }
 
-  opportunities.forEach((opportunity) => {
-    board[opportunity.h][opportunity.v].traced = true;
-  });
+  return opportunities;
 };
 
 export default calculateQueen;
