@@ -1,52 +1,53 @@
 import checkBoardBoundaries from "./checkBoardBoundaries";
 
-const calculateBishop = (x, y, board) => {
-  const bishop = board[x][y];
+const calculateBishop = (h, v, board) => {
+  const bishop = board[h][v].piece;
 
   const opportunities = [];
 
-  for (let i = x + 1, j = y + 1; checkBoardBoundaries(i, j); i++, j++) {
+  for (let i = h + 1, j = v + 1; checkBoardBoundaries(i, j); i++, j++) {
     if (board[i][j].piece) {
+      console.log(board[i][j]);
       if (board[i][j].piece.color !== bishop.color) {
-        opportunities.push({ x: i, y: j });
+        opportunities.push({ h: i, v: j });
       }
       break;
     }
-    opportunities.push({ x: i, y: j });
+    opportunities.push({ h: i, v: j });
   }
 
-  for (let i = x - 1, j = y - 1; checkBoardBoundaries(i, j); i--, j--) {
+  for (let i = h - 1, j = v - 1; checkBoardBoundaries(i, j); i--, j--) {
     if (board[i][j].piece) {
       if (board[i][j].piece.color !== bishop.color) {
-        opportunities.push({ x: i, y: j });
+        opportunities.push({ h: i, v: j });
       }
       break;
     }
-    opportunities.push({ x: i, y: j });
+    opportunities.push({ h: i, v: j });
   }
 
-  for (let i = x + 1, j = y - 1; checkBoardBoundaries(i, j); i++, j--) {
+  for (let i = h + 1, j = v - 1; checkBoardBoundaries(i, j); i++, j--) {
     if (board[i][j].piece) {
       if (board[i][j].piece.color !== bishop.color) {
-        opportunities.push({ x: i, y: j });
+        opportunities.push({ h: i, v: j });
       }
       break;
     }
-    opportunities.push({ x: i, y: j });
+    opportunities.push({ h: i, v: j });
   }
 
-  for (let i = x - 1, j = y + 1; checkBoardBoundaries(i, j); i--, j++) {
+  for (let i = h - 1, j = v + 1; checkBoardBoundaries(i, j); i--, j++) {
     if (board[i][j].piece) {
       if (board[i][j].piece.color !== bishop.color) {
-        opportunities.push({ x: i, y: j });
+        opportunities.push({ h: i, v: j });
       }
       break;
     }
-    opportunities.push({ x: i, y: j });
+    opportunities.push({ h: i, v: j });
   }
 
   opportunities.forEach((opportunity) => {
-    board[opportunity.x][opportunity.y].traced = true;
+    board[opportunity.h][opportunity.v].traced = true;
   });
 };
 export default calculateBishop;

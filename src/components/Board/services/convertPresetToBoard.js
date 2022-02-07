@@ -1,21 +1,30 @@
 const convertPresetToBoard = (preset) => {
   const board = new Array(8);
-  for (let x = 0; x < board.length; x++) {
-    board[x] = new Array(8);
-    for (let y = 0; y < board[x].length; y++) {
-      if ((x + y) % 2) {
-        board[x][y] = { color: "w", piece: null, selected: false };
+  for (let horisontal = 0; horisontal < board.length; horisontal++) {
+    board[horisontal] = new Array(8);
+
+    for (let vertical = 0; vertical < board[horisontal].length; vertical++) {
+      if ((horisontal + vertical) % 2) {
+        board[horisontal][vertical] = {
+          color: "w",
+          piece: null,
+          selected: false,
+        };
       } else {
-        board[x][y] = { color: "b", piece: null, selected: false };
+        board[horisontal][vertical] = {
+          color: "b",
+          piece: null,
+          selected: false,
+        };
       }
     }
   }
 
   for (var key in preset.pieces) {
-    const x = key.charAt(0).charCodeAt() - 97;
-    const y = key.charAt(1).charCodeAt() - 49;
+    const vertical = key.charAt(0).charCodeAt() - 97;
+    const horisontal = key.charAt(1).charCodeAt() - 49;
 
-    board[y][x].piece = {
+    board[horisontal][vertical].piece = {
       type: preset.pieces[key].piece.charAt(0),
       color: preset.pieces[key].piece.charAt(1),
       move: preset.pieces[key].move,

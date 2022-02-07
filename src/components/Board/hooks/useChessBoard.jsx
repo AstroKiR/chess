@@ -6,24 +6,28 @@ import setPawnWays from "../services/setPawnWays";
 import calculateKing from "../services/calculateKing";
 import calculateRook from "../services/calculateRook";
 import calculateBishop from "../services/calculateBishop";
+import calculateQueen from "../services/calculateQueen";
 
 //ToDo object key: type value: func
-const calculateOpportunities = (x, y, board) => {
-  switch (board[x][y].piece.type) {
+const calculateOpportunities = (h, v, board) => {
+  switch (board[h][v].piece.type) {
     case "p":
-      setPawnWays(x, y, board);
+      setPawnWays(h, v, board);
       break;
     case "n":
-      setKnightWays(x, y, board);
+      setKnightWays(h, v, board);
       break;
     case "k":
-      calculateKing(x, y, board);
+      calculateKing(h, v, board);
       break;
     case "r":
-      calculateRook(x, y, board);
+      calculateRook(h, v, board);
       break;
     case "b":
-      calculateBishop(x, y, board);
+      calculateBishop(h, v, board);
+      break;
+    case "q":
+      calculateQueen(h, v, board);
       break;
   }
 };
@@ -35,22 +39,22 @@ const createBoard = (preset) => {
   let setCurrentPiece = null;
 
   return {
-    cellClick: (x, y, turn, currentPiece) => {
+    cellClick: (h, v, turn, currentPiece) => {
       // first step
       if (!currentPiece) {
-        if (board[x][y].piece && board[x][y].piece.color === turn) {
-          board[x][y].selected = true;
-          calculateOpportunities(x, y, board);
-          setCurrentPiece({ x: x, y: y }); //ToDo x, y
+        if (board[h][v].piece && board[h][v].piece.color === turn) {
+          board[h][v].selected = true;
+          calculateOpportunities(h, v, board);
+          setCurrentPiece({ h, v });
           setView(JSON.parse(JSON.stringify(board)));
         }
       }
       // second step
       else {
-        if (board[x][y].traced) {
-          board[x][y].piece = board[currentPiece.x][currentPiece.y].piece;
-          board[x][y].piece.move += 1;
-          board[currentPiece.x][currentPiece.y].piece = null;
+        if (board[h][v].traced) {
+          board[h][v].piece = board[currentPiece.h][currentPiece.v].piece;
+          board[h][v].piece.move += 1;
+          board[currentPiece.h][currentPiece.v].piece = null;
           setTurn((turn) => (turn === "w" ? "b" : "w"));
         }
         clearBoard(board);
@@ -85,8 +89,8 @@ const useChessBoard = (preset) => {
     board.onSetBoardCurrentPiece(setBoardCurrentPiece);
   }, []);
 
-  const cellClick = (x, y) => {
-    board.cellClick(x, y, boardTurn, boardCurrentPiece);
+  const cellClick = (h, v) => {
+    board.cellClick(h, v, boardTurn, boardCurrentPiece);
   };
 
   return [boardView, boardTurn, cellClick];
