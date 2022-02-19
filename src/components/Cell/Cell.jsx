@@ -8,7 +8,7 @@ const Cell = ({ selected, traced, piece, color, h, v, onClick }) => {
     <div
       //ToDo classnames lib
       id={`${h} ${v}`}
-      className={`${styles[color]} ${selected_cell} ${traced_cell}`}
+      className={`${styles[color]} ${selected_cell} ${traced_cell} ${styles.cell}`}
       onClick={() => onClick(h, v)}
     >
       {piece ? <Piece piece={piece} /> : ""}

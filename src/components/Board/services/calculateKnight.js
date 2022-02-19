@@ -14,6 +14,7 @@ const calculateKnight = (h, v, board) => {
   ];
 
   potential_opportunities.forEach((opportunity) => {
+    // To-Do use in one place
     if (checkBoardBoundaries(opportunity.h, opportunity.v)) {
       if (!board[opportunity.h][opportunity.v].piece) {
         // there isn't a piece
@@ -28,8 +29,7 @@ const calculateKnight = (h, v, board) => {
         board[h][v].piece.color
       ) {
         // if the piece is King
-        const check =
-          board[opportunity.h][opportunity.v].piece.type === "k" ? true : false;
+        const check = board[opportunity.h][opportunity.v].piece.type === "k";
         real_opportunities.push({
           h: opportunity.h,
           v: opportunity.v,

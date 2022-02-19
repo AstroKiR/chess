@@ -34,6 +34,7 @@ const calculateOpportunities = (h, v, board) => {
   return opportunities;
 };
 
+// To-Do read functions some every
 const checkTheCheck = (h, v, opportunity, board) => {
   let checkResult = true;
   const oppositCoordinates = [];
@@ -50,6 +51,7 @@ const checkTheCheck = (h, v, opportunity, board) => {
   }
 
   oppositCoordinates.forEach((coordinates) => {
+    // To-Do object freeze
     const pieceOpportunities = calculateOpportunities(
       coordinates.h,
       coordinates.v,

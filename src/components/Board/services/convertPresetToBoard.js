@@ -4,7 +4,7 @@ const convertPresetToBoard = (preset) => {
     board[horisontal] = new Array(8);
 
     for (let vertical = 0; vertical < board[horisontal].length; vertical++) {
-      if ((horisontal + vertical) % 2) {
+      if ((horisontal + vertical) & 1) {
         board[horisontal][vertical] = {
           color: "w",
           piece: null,
